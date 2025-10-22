@@ -1,0 +1,222 @@
+/**
+ * @file styles.css
+ * @description Main stylesheet for the NEO Dashboard.
+ * Uses a hybrid CSS Grid (for page layout) and Flexbox (for components)
+ * approach to achieve responsiveness (Req 3).
+ *
+ * --- TABLE OF CONTENTS ---
+ * 1. Global Variables & Resets
+ * 2. Main Layout (CSS Grid)
+ * 3. Component Styles (Flexbox)
+ * - Filter Controls
+ * - Chart Containers
+ * 4. Status Messages
+ * 5. Header & Footer
+ */
+
+
+/* --- 1. Global Variables & Resets --- */
+:root {
+    --color-fondo: #f4f7f9;
+    --color-superficie: #ffffff;
+    --color-texto: #333;
+    --color-primario: #005a9c;
+    --borde-radio: 8px;
+    --sombra-caja: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    margin: 0 0 0.5em 0;
+}
+
+/* --- 2. Main Layout (CSS Grid) --- */
+/*
+ * Using CSS Grid to define the main page areas.
+ * This provides a robust, high-level structure for the dashboard.
+*/
+.dashboard-container {
+    display: grid;
+    /* Defines 3 main rows: controls, status, and charts */
+    grid-template-areas:
+        "controles"
+        "estado"
+        "graficos";
+    grid-template-rows: auto auto 1fr; /* The charts row expands to fill remaining space */
+    gap: 24px;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto; /* Center the dashboard */
+}
+
+/* Assigning our semantic sections from HTML to the named grid areas */
+.controls-section { 
+    grid-area: controles; 
+}
+#status-container { 
+    grid-area: estado; 
+}
+.charts-wrapper { 
+    grid-area: graficos; 
+}
+
+
+/* --- 3. Component Styles (Flexbox) --- */
+
+/* --- Filter Controls --- */
+/*
+ * Using Flexbox to align filter controls horizontally.
+ * 'flex-wrap: wrap' is key for responsiveness on smaller screens (Req 3).
+*/
+#filters-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end; /* Aligns button with the bottom of the inputs */
+    padding: 20px;
+    background-color: var(--color-superficie);
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-caja);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1; /* Allows input groups to grow and fill empty space */
+}
+
+#filters-form label {
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+#filters-form input[type="date"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+#filters-form button {
+    padding: 10px 20px;
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#filters-form button:hover {
+    background-color: #004a80;
+}
+
+
+/* --- Chart Containers --- */
+/*
+ * Using Flexbox again for the charts wrapper.
+ * 'flex-wrap' will stack the charts vertically on small screens.
+*/
+.charts-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* <-- This enables responsive stacking */
+    gap: 24px;
+}
+
+/*
+ * This is the core of the responsive chart layout (Req 3).
+ * 'flex: 1 1 400px' is shorthand for:
+ * - flex-grow: 1 (Allows chart to grow to fill space)
+ * - flex-shrink: 1 (Allows chart to shrink)
+ * - flex-basis: 400px (Tries to be 400px wide)
+ *
+ * On large screens, two 400px+ items fit side-by-side.
+ * On small screens, they don't, so 'flex-wrap' stacks them.
+*/
+.chart-container {
+    flex: 1 1 400px;
+    min-width: 300px; /* Prevents the chart from becoming too small */
+    
+    background-color: var(--color-superficie);
+    padding: 24px;
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-caja);
+}
+
+/*
+ * Ensures the <canvas> element respects its container's boundaries,
+ * which is necessary for Chart.js's 'responsive: true' option.
+*/
+.chart-container canvas {
+    max-width: 100%;
+    height: auto !important; /* Overrides Chart.js inline style */
+}
+
+
+/* --- 4. Status Messages --- */
+/* For loading and error feedback (Req 5) */
+.status-container {
+    padding: 16px;
+    border-radius: var(--borde-radio);
+    display: none; /* Controlled by 'ui.js' to be shown when needed */
+}
+
+.status-message {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Loading message style */
+#loading-message {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    color: #096dd9;
+}
+
+/* Error message style */
+#error-message {
+    background-color: #fff1f0;
+    border: 1px solid #ffa39e;
+    color: #cf1322;
+}
+
+/* --- 5. Header & Footer --- */
+.main-header, .main-footer {
+    padding: 20px 24px;
+    background-color: var(--color-superficie);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.main-header h1 {
+    font-size: 1.5em;
+    color: var(--color-primario);
+    margin: 0;
+}
+
+.main-footer {
+    margin-top: 24px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.main-footer a {
+    color: var(--color-primario);
+    text-decoration: none;
+}
+
+.main-footer a:hover {
+    text-decoration: underline;
+}
+
