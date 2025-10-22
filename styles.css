@@ -1,8 +1,6 @@
 /**
  * @file styles.css
  * @description Main stylesheet for the NEO Dashboard.
- * Uses a hybrid CSS Grid (for page layout) and Flexbox (for components)
- * approach to achieve responsiveness (Req 3).
  *
  * --- TABLE OF CONTENTS ---
  * 1. Global Variables & Resets
@@ -10,25 +8,26 @@
  * 3. Component Styles (Flexbox)
  * - Filter Controls
  * - Chart Containers
- * 4. Status Messages
+ * 4. Status Messages (Loading/Error)
  * 5. Header & Footer
  */
-
 
 /* --- 1. Global Variables & Resets --- */
 :root {
     --color-fondo: #f4f7f9;
     --color-superficie: #ffffff;
     --color-texto: #333;
-    --color-primario: #005a9c;
+    --color-primario: #005a9c; /* Dinametra-inspired blue */
+    --color-error: #cf1322;
+    --color-error-fondo: #fff1f0;
     --borde-radio: 8px;
     --sombra-caja: 0 4px 12px rgba(0,0,0,0.05);
 }
 
+/* A simple reset for a consistent base */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    padding: 0;
     background-color: var(--color-fondo);
     color: var(--color-texto);
     line-height: 1.6;
@@ -36,51 +35,47 @@ body {
 
 h1, h2, h3 {
     margin: 0 0 0.5em 0;
+    font-weight: 600;
 }
 
 /* --- 2. Main Layout (CSS Grid) --- */
 /*
- * Using CSS Grid to define the main page areas.
- * This provides a robust, high-level structure for the dashboard.
+ * We use CSS Grid for the main page structure (Req 3).
+ * This gives us a robust "skeleton" for our dashboard sections.
 */
 .dashboard-container {
     display: grid;
-    /* Defines 3 main rows: controls, status, and charts */
+    /* We define three logical rows: controls, status, and charts */
     grid-template-areas:
         "controles"
         "estado"
         "graficos";
-    grid-template-rows: auto auto 1fr; /* The charts row expands to fill remaining space */
+    grid-template-rows: auto auto 1fr; /* The charts row fills remaining space */
     gap: 24px;
     padding: 24px;
     max-width: 1400px;
-    margin: 0 auto; /* Center the dashboard */
+    margin: 0 auto; /* Center the whole dashboard */
 }
 
-/* Assigning our semantic sections from HTML to the named grid areas */
-.controls-section { 
-    grid-area: controles; 
-}
-#status-container { 
-    grid-area: estado; 
-}
-.charts-wrapper { 
-    grid-area: graficos; 
-}
+/* Assign our HTML sections to the grid areas we just named */
+.controls-section { grid-area: controles; }
+#status-container { grid-area: estado; }
+.charts-wrapper   { grid-area: graficos; }
 
 
 /* --- 3. Component Styles (Flexbox) --- */
 
 /* --- Filter Controls --- */
 /*
- * Using Flexbox to align filter controls horizontally.
- * 'flex-wrap: wrap' is key for responsiveness on smaller screens (Req 3).
+ * We use Flexbox for the form components (Req 3).
+ * 'flex-wrap: wrap' is the key to making the form responsive: on small
+ * screens, the items will stack vertically instead of overflowing.
 */
 #filters-form {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    align-items: flex-end; /* Aligns button with the bottom of the inputs */
+    align-items: flex-end; /* Aligns the button nicely with the inputs */
     padding: 20px;
     background-color: var(--color-superficie);
     border-radius: var(--borde-radio);
@@ -91,12 +86,12 @@ h1, h2, h3 {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    flex-grow: 1; /* Allows input groups to grow and fill empty space */
+    flex-grow: 1; /* Allows date inputs to fill the available space */
 }
 
 #filters-form label {
     font-size: 0.9em;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 #filters-form input[type="date"] {
@@ -122,15 +117,14 @@ h1, h2, h3 {
     background-color: #004a80;
 }
 
-
 /* --- Chart Containers --- */
 /*
- * Using Flexbox again for the charts wrapper.
- * 'flex-wrap' will stack the charts vertically on small screens.
+ * Flexbox is used again for the charts wrapper (Req 3).
+ * 'flex-wrap' will stack the charts on mobile.
 */
 .charts-wrapper {
     display: flex;
-    flex-wrap: wrap; /* <-- This enables responsive stacking */
+    flex-wrap: wrap; /* <-- The magic for responsive charts! */
     gap: 24px;
 }
 
@@ -141,61 +135,86 @@ h1, h2, h3 {
  * - flex-shrink: 1 (Allows chart to shrink)
  * - flex-basis: 400px (Tries to be 400px wide)
  *
- * On large screens, two 400px+ items fit side-by-side.
- * On small screens, they don't, so 'flex-wrap' stacks them.
+ * This setup allows the grid to be 1, 2, or 3 columns wide
+ * depending on the available screen width, automatically.
 */
 .chart-container {
     flex: 1 1 400px;
-    min-width: 300px; /* Prevents the chart from becoming too small */
-    
+    min-width: 300px; /* Prevents the chart from becoming unreadably small */
     background-color: var(--color-superficie);
     padding: 24px;
     border-radius: var(--borde-radio);
     box-shadow: var(--sombra-caja);
+    /* Ensures the header and chart wrapper align vertically */
+    display: flex;
+    flex-direction: column;
 }
 
 /*
- * Ensures the <canvas> element respects its container's boundaries,
- * which is necessary for Chart.js's 'responsive: true' option.
+ * This inner wrapper gives us fine-grained control over the canvas size.
+ * It's crucial for 'maintainAspectRatio: false' to work correctly.
+*/
+.chart-flex-wrapper {
+    flex-grow: 1; /* Allows it to take all available vertical space in the card */
+    position: relative; /* Required by Chart.js for responsiveness */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px; /* Ensures even small charts have some space */
+}
+
+/*
+ * This class limits the height of charts that look better
+ * when they are not overly tall, like doughnuts.
+*/
+.chart-flex-wrapper.compact {
+    max-height: 350px;
+    height: 100%;
+}
+
+/*
+ * This ensures the <canvas> element itself respects its parent's boundaries.
 */
 .chart-container canvas {
     max-width: 100%;
-    height: auto !important; /* Overrides Chart.js inline style */
+    height: auto !important; /* Overrides Chart.js's inline style */
 }
 
 
 /* --- 4. Status Messages --- */
-/* For loading and error feedback (Req 5) */
+/* For loading/error feedback (Req 5) */
 .status-container {
     padding: 16px;
     border-radius: var(--borde-radio);
-    display: none; /* Controlled by 'ui.js' to be shown when needed */
+    /* 'display: none' is the default; 'ui.js' will show this container */
+    display: none;
 }
 
 .status-message {
     margin: 0;
+    padding: 12px;
+    border: 1px solid;
+    border-radius: 4px;
     font-weight: 500;
 }
 
-/* Loading message style */
 #loading-message {
     background-color: #e6f7ff;
-    border: 1px solid #91d5ff;
+    border-color: #91d5ff;
     color: #096dd9;
 }
 
-/* Error message style */
 #error-message {
-    background-color: #fff1f0;
-    border: 1px solid #ffa39e;
-    color: #cf1322;
+    background-color: var(--color-error-fondo);
+    border-color: #ffa39e;
+    color: var(--color-error);
 }
 
 /* --- 5. Header & Footer --- */
 .main-header, .main-footer {
     padding: 20px 24px;
     background-color: var(--color-superficie);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: var(--sombra-caja);
     text-align: center;
 }
 

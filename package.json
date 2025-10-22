@@ -1,0 +1,26 @@
+{
+  "name": "frontend-assessment_dinametra",
+  "version": "1.0.0",
+  "description": "Task to showcase skills with Front-End for Dinametra.",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinezpalomera92/FrontEnd-Assessment_Dinametra.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/martinezpalomera92/FrontEnd-Assessment_Dinametra/issues"
+  },
+  "homepage": "https://github.com/martinezpalomera92/FrontEnd-Assessment_Dinametra#readme",
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "jest": "^30.2.0"
+  }
+}

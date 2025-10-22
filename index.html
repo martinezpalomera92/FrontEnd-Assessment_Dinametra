@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Dinametra - Dashboard NEO NASA</title>
+    <title>Dinametra - Dashboard NEO</title>
 
     <link rel="stylesheet" href="styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-
+    
     <script type="module" src="./js/main.js" defer></script>
 </head>
 
@@ -23,7 +23,6 @@
 
         <section class="controls-section" aria-labelledby="filters-title">
             <h2 id="filters-title">Filtros de Datos</h2>
-            <p id="filters-subTitle">(NASA API solo permite rangos de 7 días)</p>
             
             <form id="filters-form" role="search">
                 <div class="filter-group">
@@ -49,16 +48,29 @@
             
             <article class="chart-container">
                 <h3>Tendencia Diaria de NEOs</h3>
-                <canvas id="dailyLineChart" role="img" aria-label="Gráfico de línea mostrando el total de asteroides por día.">
-                    Tu navegador no soporta canvas. Se muestra un gráfico de línea de NEOs por día.
-                </canvas>
+                <div class="chart-flex-wrapper">
+                    <canvas id="dailyLineChart" role="img" aria-label="Gráfico de línea mostrando el total de asteroides por día.">
+                        Tu navegador no soporta canvas.
+                    </canvas>
+                </div>
             </article>
 
             <article class="chart-container">
                 <h3>Distribución de Riesgo</h3>
-                <canvas id="hazardDoughnutChart" role="img" aria-label="Gráfico de dona mostrando la proporción de asteroides peligrosos vs. no peligrosos.">
-                    Tu navegador no soporta canvas. Se muestra un gráfico de dona sobre la peligrosidad de los NEOs.
-                </canvas>
+                <div class="chart-flex-wrapper compact">
+                    <canvas id="hazardDoughnutChart" role="img" aria-label="Gráfico de dona mostrando la proporción de asteroides peligrosos vs. no peligrosos.">
+                        Tu navegador no soporta canvas.
+                    </canvas>
+                </div>
+            </article>
+
+            <article class="chart-container">
+                <h3>Distancias de Aproximación</h3>
+                <div class="chart-flex-wrapper">
+                    <canvas id="distanceBarChart" role="img" aria-label="Gráfico de barras horizontales mostrando las 10 distancias de aproximación más cercanas.">
+                        Tu navegador no soporta canvas.
+                    </canvas>
+                </div>
             </article>
 
         </section>
@@ -66,6 +78,7 @@
 
     <footer class="main-footer">
         <p>Prueba Técnica para Dinametra. Datos proporcionados por la <a href="https://api.nasa.gov/" target="_blank" rel="noopener noreferrer">API de NASA NeoWs</a>.</p>
+        <p id="portfolioLink"> <a href="https://martinezpalomera92.github.io/aboutMePortfolioJAMP/">© 2025 Jaime A. Martínez</a></p>
     </footer>
 
 </body>

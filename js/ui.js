@@ -7,31 +7,11 @@
  * Fulfills Requirement 5 (Error Handling).
  */
 
-// Get references to UI elements once when the module loads for efficiency,
-// rather than querying the DOM repeatedly.
-/**
- * The paragraph element for displaying the loading message.
- * @const {HTMLElement}
- */
-const loadingMessage = document.getElementById('loading-message'); //
-
-/**
- * The paragraph element for displaying error messages.
- * @const {HTMLElement}
- */
-const errorMessage = document.getElementById('error-message'); //
-
-/**
- * The container wrapper for all status messages.
- * @const {HTMLElement}
- */
-const statusContainer = document.getElementById('status-container'); //
-
-/**
- * The section wrapper containing all data charts.
- * @const {HTMLElement}
- */
-const chartWrapper = document.querySelector('.charts-wrapper'); //
+// Get references to UI elements once when the module loads for efficiency
+const loadingMessage = document.getElementById('loading-message');
+const errorMessage = document.getElementById('error-message');
+const statusContainer = document.getElementById('status-container');
+const chartWrapper = document.querySelector('.charts-wrapper');
 
 /**
  * Updates the user interface to reflect the current application state.
@@ -62,19 +42,19 @@ export function updateUIStatus(status, message = '') {
             break;
         case 'error':
             // Show only the error message, populated with the error content
-            errorMessage.textContent = message || 'An unknown error occurred.';
+            errorMessage.textContent = message || 'Ocurrió un error desconocido.'; // <-- Changed to Spanish
             errorMessage.style.display = 'block';
             break;
         case 'loaded':
             // Content is loaded, hide the entire status container
             statusContainer.style.display = 'none';
             // Show the charts, using 'flex' as defined in styles.css
-            chartWrapper.style.display = 'flex'; 
+            chartWrapper.style.display = 'flex';
             break;
         default:
             // Fallback for an invalid state, which helps in debugging
             console.warn(`Invalid UI status called: ${status}`);
-            errorMessage.textContent = `An invalid UI state (${status}) was triggered.`;
+            errorMessage.textContent = `Un estado de UI inválido (${status}) fue activado.`; // <-- Changed to Spanish
             errorMessage.style.display = 'block';
     }
 }
