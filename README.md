@@ -46,10 +46,11 @@ Instrucciones detalladas sobre cómo configurar y ejecutar la aplicación.
 2.2 Pasos de Instalación
 
 	-Instalar Dependencias de Desarrollo:
-            ___________________
 		
+    ____________________
+
 		npm install
-            ___________________
+    ____________________
 
 	-Configurar API Key: 
 	Abrir el archivo js/api.js y reemplazar el valor de API_KEY con su clave de la NASA.
@@ -59,10 +60,11 @@ Instrucciones detalladas sobre cómo configurar y ejecutar la aplicación.
 
 2.3 Ejecución de Pruebas Unitarias
 Para validar la lógica pura de la aplicación (módulos dataProcessor.js y api.js):
-           ____________________
+
+    __________________
 
 		npm test
-           ____________________
+    __________________
 
 	-Resultado Esperado: Todos los tests pasarán, confirmando la robustez del manejo de datos y errores de red.
 
