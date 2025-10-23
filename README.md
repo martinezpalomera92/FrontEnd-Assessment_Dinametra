@@ -87,3 +87,8 @@ Para validar la lógica pura de la aplicación (módulos dataProcessor.js y api.
 		-Detalle: Al ejecutar npm test, se muestra una advertencia de console.error sobre un error HTTP 400.
 
 		-Solución Adoptada: Es el comportamiento esperado. Esto verifica que la función fetchNeoData maneja y relanza correctamente los errores de la API.
+
+
+# Sample functionality:
+
+-Initial state  ![Image Alt](/public/img/ScreenShots/01_initial-state.png)
