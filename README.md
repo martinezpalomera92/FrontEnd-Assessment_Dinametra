@@ -94,3 +94,10 @@ Para validar la lógica pura de la aplicación (módulos dataProcessor.js y api.
 # Sample functionality:
 
 -Initial state  ![Image Alt](/public/img/ScreenShots/01_initial-state.png)
+
+
+-Applying filter ![Image Alt](/public/img/ScreenShots/02_applying-filter.png)
+
+-Filter applied ![Image Alt](/public/img/ScreenShots/03_filter-applied.png)
+
+-Filter range exceeded ![Image Alt](/public/img/ScreenShots/04_out-of-range.png)
