@@ -53,7 +53,7 @@ Instrucciones detalladas sobre cómo configurar y ejecutar la aplicación.
     ____________________
 
 	-Configurar API Key: 
-	Abrir el archivo js/api.js y reemplazar el valor de API_KEY con su clave de la NASA.
+	Abrir el archivo js/api.js y reemplazar el valor de API_KEY con su clave de la NASA. ![Image Alt](/public/img/ScreenShots/API_placement.png)
 
 	-Ejecutar la Aplicación: 
 	Abra el archivo index.html directamente en su navegador web.
