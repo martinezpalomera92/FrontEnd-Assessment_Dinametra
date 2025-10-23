@@ -92,13 +92,12 @@ Para validar la lógica pura de la aplicación (módulos dataProcessor.js y api.
 		-Solución Adoptada: Es el comportamiento esperado. Esto verifica que la función fetchNeoData maneja y relanza correctamente los errores de la API.
 
 
-# Sample functionality:
+# Muestra de Funcionalidad:
 
--Initial state  ![Initial state IMG](/public/img/ScreenShots/01_initial-state.png)
+-Estado Inicial (con clave API)  ![Initial state IMG](/public/img/ScreenShots/01_initial-state.png)
 
+-Aplicando filtros ![appplying filter IMG](/public/img/ScreenShots/02_applying-filter.png)
 
--Applying filter ![appplying filter IMG](/public/img/ScreenShots/02_applying-filter.png)
+-Filtros aplicados ![Filter applied IMG](/public/img/ScreenShots/03_filter-applied.png)
 
--Filter applied ![Filter applied IMG](/public/img/ScreenShots/03_filter-applied.png)
-
--Filter range exceeded ![Out of range IMG](/public/img/ScreenShots/04_out-of-range.png)
+-Rango del filtro excedido ![Out of range IMG](/public/img/ScreenShots/04_out-of-range.png)
