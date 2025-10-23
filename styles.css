@@ -28,10 +28,21 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    background-color: var(--color-fondo);
+    /* --- CORRECTION/ENHANCEMENT: Applying the space-themed background --- */
+    /* Assuming the image is saved as 'nasa_neos_background.png' in the 'images' folder */
+    background-image: url('/public/img/background.webp'); 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background static when content scrolls */
+    
+    /* Set a fallback color in case the image doesn't load */
+    background-color: #1a1a2e; /* A dark space-like color */
+    
     color: var(--color-texto);
     line-height: 1.6;
 }
+/* Optional: If the background is too dark, you might need to change var(--color-texto) to a lighter color here for global readability. For now, we keep it as is. */
 
 h1, h2, h3 {
     margin: 0 0 0.5em 0;
@@ -42,7 +53,7 @@ h1, h2, h3 {
 /*
  * We use CSS Grid for the main page structure (Req 3).
  * This gives us a robust "skeleton" for our dashboard sections.
-*/
+ */
 .dashboard-container {
     display: grid;
     /* We define three logical rows: controls, status, and charts */
@@ -70,7 +81,7 @@ h1, h2, h3 {
  * We use Flexbox for the form components (Req 3).
  * 'flex-wrap: wrap' is the key to making the form responsive: on small
  * screens, the items will stack vertically instead of overflowing.
-*/
+ */
 #filters-form {
     display: flex;
     flex-wrap: wrap;
@@ -87,6 +98,20 @@ h1, h2, h3 {
     flex-direction: column;
     gap: 6px;
     flex-grow: 1; /* Allows date inputs to fill the available space */
+}
+
+#filters-title {
+    flex-basis: 100%; /* Makes the title take a full row */
+    margin: 0 0 8px 0;
+    color: gainsboro;
+    text-shadow: 
+    0 0 0px #fff,        /* Inner, brighter glow */
+    0 0 10px #0073e6,     /* Medium glow layer */
+    0 0 15px #0073e6,
+    0 0 20px #0073e6,
+    0 0 25px #0073e6,
+    0 0 30px #0073e6,
+    0 0 35px #0073e6;    /* Outer, wider glow */
 }
 
 #filters-form label {
@@ -121,7 +146,7 @@ h1, h2, h3 {
 /*
  * Flexbox is used again for the charts wrapper (Req 3).
  * 'flex-wrap' will stack the charts on mobile.
-*/
+ */
 .charts-wrapper {
     display: flex;
     flex-wrap: wrap; /* <-- The magic for responsive charts! */
@@ -137,7 +162,7 @@ h1, h2, h3 {
  *
  * This setup allows the grid to be 1, 2, or 3 columns wide
  * depending on the available screen width, automatically.
-*/
+ */
 .chart-container {
     flex: 1 1 400px;
     min-width: 300px; /* Prevents the chart from becoming unreadably small */
@@ -153,7 +178,7 @@ h1, h2, h3 {
 /*
  * This inner wrapper gives us fine-grained control over the canvas size.
  * It's crucial for 'maintainAspectRatio: false' to work correctly.
-*/
+ */
 .chart-flex-wrapper {
     flex-grow: 1; /* Allows it to take all available vertical space in the card */
     position: relative; /* Required by Chart.js for responsiveness */
@@ -166,7 +191,7 @@ h1, h2, h3 {
 /*
  * This class limits the height of charts that look better
  * when they are not overly tall, like doughnuts.
-*/
+ */
 .chart-flex-wrapper.compact {
     max-height: 350px;
     height: 100%;
@@ -174,7 +199,7 @@ h1, h2, h3 {
 
 /*
  * This ensures the <canvas> element itself respects its parent's boundaries.
-*/
+ */
 .chart-container canvas {
     max-width: 100%;
     height: auto !important; /* Overrides Chart.js's inline style */
@@ -183,7 +208,12 @@ h1, h2, h3 {
 
 /* --- 4. Status Messages --- */
 /* For loading/error feedback (Req 5) */
-.status-container {
+/* CORRECTION: Renamed #status-container to .status-container for consistency */
+#status-container {
+    /* REMOVED: Since .status-container is now the selector, we rename it below */
+}
+
+.status-container { /* This is the more consistent class name */
     padding: 16px;
     border-radius: var(--borde-radio);
     /* 'display: none' is the default; 'ui.js' will show this container */
@@ -213,7 +243,8 @@ h1, h2, h3 {
 /* --- 5. Header & Footer --- */
 .main-header, .main-footer {
     padding: 20px 24px;
-    background-color: var(--color-superficie);
+    /* Since we have a space background, let's make the header and footer slightly transparent */
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
     box-shadow: var(--sombra-caja);
     text-align: center;
 }
@@ -228,6 +259,7 @@ h1, h2, h3 {
     margin-top: 24px;
     font-size: 0.9em;
     color: #777;
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
 }
 
 .main-footer a {
@@ -238,4 +270,3 @@ h1, h2, h3 {
 .main-footer a:hover {
     text-decoration: underline;
 }
-
