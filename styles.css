@@ -207,11 +207,6 @@ h1, h2, h3 {
 
 
 /* --- 4. Status Messages --- */
-/* For loading/error feedback (Req 5) */
-/* CORRECTION: Renamed #status-container to .status-container for consistency */
-#status-container {
-    /* REMOVED: Since .status-container is now the selector, we rename it below */
-}
 
 .status-container { /* This is the more consistent class name */
     padding: 16px;
