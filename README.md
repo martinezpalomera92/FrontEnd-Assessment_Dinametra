@@ -53,7 +53,8 @@ Instrucciones detalladas sobre cómo configurar y ejecutar la aplicación.
     ____________________
 
 	-Configurar API Key: 
-	Abrir el archivo js/api.js y reemplazar el valor de API_KEY con su clave de la NASA. ![Image Alt](/public/img/ScreenShots/API_placement.png)
+	Abrir el archivo js/api.js y reemplazar el valor de API_KEY con su clave de la NASA. 
+![API Replace img](/public/img/ScreenShots/API_placement.png)
 
 	-Ejecutar la Aplicación: 
 	Abra el archivo index.html directamente en su navegador web.
@@ -93,11 +94,11 @@ Para validar la lógica pura de la aplicación (módulos dataProcessor.js y api.
 
 # Sample functionality:
 
--Initial state  ![Image Alt](/public/img/ScreenShots/01_initial-state.png)
+-Initial state  ![Initial state IMG](/public/img/ScreenShots/01_initial-state.png)
 
 
--Applying filter ![Image Alt](/public/img/ScreenShots/02_applying-filter.png)
+-Applying filter ![appplying filter IMG](/public/img/ScreenShots/02_applying-filter.png)
 
--Filter applied ![Image Alt](/public/img/ScreenShots/03_filter-applied.png)
+-Filter applied ![Filter applied IMG](/public/img/ScreenShots/03_filter-applied.png)
 
--Filter range exceeded ![Image Alt](/public/img/ScreenShots/04_out-of-range.png)
+-Filter range exceeded ![Out of range IMG](/public/img/ScreenShots/04_out-of-range.png)

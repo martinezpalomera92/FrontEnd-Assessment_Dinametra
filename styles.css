@@ -30,7 +30,7 @@ body {
     margin: 0;
     /* --- CORRECTION/ENHANCEMENT: Applying the space-themed background --- */
     /* Assuming the image is saved as 'nasa_neos_background.png' in the 'images' folder */
-    background-image: url('/public/img/background.webp'); 
+    background-image: url('public/img/background.webp'); 
     background-size: cover; 
     background-position: center;
     background-repeat: no-repeat;
