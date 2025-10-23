@@ -8,7 +8,7 @@
  * The default API key for NASA APIs.
  * @const {string}
  */
-const API_KEY = 'tv6LqOqjPiAdzOhfoPLDd51G2oZBVlaYqf5s2Rl6'; //
+const API_KEY = 'INSERT_API_KEY_HERE'; //
 
 /**
  * The base URL for the NASA NeoWs (Near Earth Object Web Service) Feed endpoint.
@@ -34,7 +34,7 @@ export async function fetchNeoData(startDate, endDate) {
     if (!response.ok) {
       // Create a more informative error message for HTTP errors
       const errorData = await response.json(); // Try to get error details from NASA's response
-      throw new Error(`HTTP error! Status: ${response.status} - ${errorData.error_message || 'Unknown API Error'}`);
+      throw new Error(`HTTP error! Status: ${response.status} - ${errorData.error_message || 'Error, Por favor verifica o agrega tu clave API en js/api.js'}`); //
     }
     
     return await response.json(); //
